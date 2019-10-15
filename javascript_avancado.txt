@@ -2,6 +2,11 @@
 
 1) PRÓLOGO: REGRAS, CÓDIGOS E MANUTENÇÃO. - 20 min
 
+    DOM.
+        document.querySelector()
+            é uma API do DOM que me permite buscar um elemento do DOM, usando um seletor CSS.
+    
+
 2) ESPECIFICANDO UMA NEGOCIAÇÃO. - 44 min
 
 3) A LIGAÇÃO ENTRE AÇÕES DO USUÁRIO E O MODELO - 50 min
