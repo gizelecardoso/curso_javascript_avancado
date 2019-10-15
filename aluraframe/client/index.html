@@ -59,7 +59,21 @@
         </tfoot>
     </table>
 
-    <script src="js/index.js"></script>
+    <script src="js/app/models/Negociacao.js"></script>
+    <script>
+        
+        let hoje = new Date();
+        let n1 = new Negociacao(hoje, 5, 700);
+
+      //  Object.freeze(n1);//isso é procedural
+        
+        console.log(n1.data);
+        
+        hoje.setDate(16);
+
+        console.log(n1.data);
+
+    </script>
     
 </body>
 </html>

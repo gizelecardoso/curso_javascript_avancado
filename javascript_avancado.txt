@@ -9,6 +9,126 @@
 
 2) ESPECIFICANDO UMA NEGOCIAÇÃO. - 44 min
 
+    MODEL:
+        é uma abstração de algo do mundo real.
+
+        CRIAÇÃO DE CLASSES:
+                    especificação da abstração de um Modelo.
+
+            class - palavra chave
+            nomeClasse - pascal case - primeira letra maiuscula e outras minuscula.
+
+            class Classe{
+                constructor(){
+                    this.nome = '';
+                    this.quantidade = 0;
+                }
+            }
+
+            classe recebe um construtor com suas propriedades = atributos, no JAVASCRIPT propriedades é mais usado.
+    
+    MODIFICADORES DE ACESSO:
+        - Não é possivel implementar os modificadores   = usamos o simbolo "_" nos atributos que não podem ser modificados.
+                    Convenção para o programador, dizendo que essas propriedades só podem ser acessadas pelos métodos da classe.
+    
+
+       constructor(data, quantidade, valor){
+        this._data = data;
+        this._quantidade = quantidade;
+        this._valor = valor;
+
+        Object.freeze(this);
+        //is shalow (congela as propriedades do OBJETO) 
+        não é DEEP- como Data é um OBJETO com outras propriedade,
+                                    --essas propriedades não estão congeladas.
+    }
+
+                    CURIOSIDADE: a linguagem TypeScript da Microsoft permite definir atributos privados 
+                    com o modificador private. TypeScript nada mais é do que um superset do ES2015+ '
+                    com a adição de novos recursos, inclusive aquele que define atributos privados.
+
+    métodos get:
+        Exemplos:
+
+                getValor ()     => acesso variavel.getValor();
+
+                get valor()     => acesso variavel.valor;  acesso como se fosse uma propriedade,
+                                                                mas por debaixo dos panos, é um método sendo acessado.
+    
+    COMO RESOLVER?
+
+        COM A PROGRAMAÇÃO DEFENSIVA:
+
+
+            return new Date(this._data.getTime());
+            //getTime retorna um LONG com a representação dessa data.
+
+
+            como estamos criando um NEW object, quanto der:
+                    n1.data.setDate(16);
+
+                    //estara alterando a cópia que fizemos e não o objeto interno que estamos trabalhando.
+
+            ISSO É PROGRAMAÇÃO DEFENSIVA.
+
+            Cuidado com os parâmetros recebidos no construtor por referência - não da para confiar.
+
+                Exemplo:
+
+                constructor(data, quantidade, valor){
+                    this._data = data;
+                    this._quantidade = quantidade;
+                    this._valor = valor;
+
+                    Object.freeze(this);                                                           
+                }
+
+
+                quando chamamos o contrutor e passamos os parametro, podemos fazer da seguinte maneira:
+
+                    var hoje = new Date();
+
+                    var n1 = new Negociacao(hoje, 7, 200.5);
+
+                    hoje.setDate(11);
+
+                        //aqui o hoje é uma referência a variavel criada, então as alterações, serão feitas direto nessa variavel.
+                        //essa data será alterada, por isso devemos como fizemos no get data - 
+                                criar uma cópia, para a nossa data não ser alterada.
+
+
+
+                  constructor(data, quantidade, valor){
+                    this._data = new Date(data.getTime());
+                    this._quantidade = quantidade;
+                    this._valor = valor; 
+
+                    Object.freeze(this);                                                           
+                }
+
+                //com essa mudança o hoje que eu recebo como parâmetro do meu construtor, 
+                            não é mais uma REF para hoje, é um NEW OBJECT.  uma cópia.
+
+
+
+        DECLARAÇÃO DE VARIAVEL COM LET:
+
+            EM JAVASCRIPT não existe escopo de BLOCO.
+                se declarada com VAR.
+
+                se declarar com LET - ganha o escopo de BLOCO. A variavel só existe no bloco em que ela foi declarada.
+
+
+        DATE - é uma FUNÇÃO CONSTRUTORA   = ES5;
+                ES2015 - usamos muito como CLASSES pois basicamentes fazem a mesma coisa, de implementar a OO.
+
+        
+        JavaScript é uma linguagem multiparadigma, podemos programar:
+            1) proceduralmente, 
+            2) funcionalmente e 
+            3) orientado a objetos.
+
+
 3) A LIGAÇÃO ENTRE AÇÕES DO USUÁRIO E O MODELO - 50 min
 
 4) LIGAR COM DATA É TRABALHOSO? CHAME UM AJUDANTE! - 48 min
